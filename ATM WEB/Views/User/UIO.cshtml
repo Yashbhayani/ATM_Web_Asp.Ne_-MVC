@@ -1,0 +1,120 @@
+﻿@model ATM_WEB.Models.ATMWEB
+@using ATM_WEB.Models
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+<style>
+    #IO {
+        padding: 20px;
+    }
+
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th {
+        border: 1px solid #dddddd;
+        text-align: center;
+        padding: 8px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #dddddd;
+    }
+    input, select, textarea {
+        max-width: 1140px;
+    }
+</style>
+<div class="form-horizontal">
+    <h4>ATMBANK</h4>
+    <hr />
+</div>
+
+<h4>@ViewBag.Message1</h4>
+
+<div>
+    @using (Html.BeginForm("Index", "User", FormMethod.Post))
+    {
+
+        <form class="form-inline" id="IO">
+            <div class="form-group">
+                @Html.LabelFor(m => m.UserATM, new { @class = "control-label" })
+                @Html.TextAreaFor(m => m.UserATM, new { @class = "form-control", rows = "5"})
+                @*                @Html.EditorFor(m => m.UserATM, new { htmlAttributes = new { @class = "form-control", style = "Width:100%" } })*@
+                @Html.ValidationMessageFor(m => m.UserATM)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Bankbankbalance, new { @class = "control-label" })
+                @Html.EditorFor(m => m.Bankbankbalance, new { htmlAttributes = new { @class = "form-control", style = "Width:100%" } })
+                @Html.ValidationMessageFor(m => m.Bankbankbalance)
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.WidrowAmount, new { @class = "control-label" })
+                @Html.EditorFor(m => m.WidrowAmount, new { htmlAttributes = new { @class = "form-control", style = "Width:100%" } })
+                @Html.ValidationMessageFor(m => m.WidrowAmount)
+            </div>
+
+            <div class="form-group">
+                <button type="submit" value="Add" class="btn btn-success">Submit</button>
+            </div>
+        </form>
+    }
+        <script type="text/javascript">
+            if (Model.WidrowAmount > Model.Bankbankbalance) {
+                {
+                    alert("@ViewBag.Message");
+                };
+            }
+        </script>
+
+    <br /><br />
+    <table>
+        <tr>
+            <th>NO.</th>
+            <th>Currency Notes</th>
+            <th>Currency</th>
+            <th>Use Currency Notes</th>
+            <th>Total Amount</th>
+            <th>Remaining Notes</th>
+        </tr>
+        @if (Model != null && Model.YUIOP != null)
+        {
+            foreach (var item in Model.YUIOP)
+            {
+
+                <tr>
+                    <th>@item.ID</th>
+                    <th>@item.IR</th>
+                    <th>@item.IV</th>
+                    <th>@item.IY</th>
+                    <th>@item.IS</th>
+                    <th>@item.IRN</th>
+                </tr>
+
+            }
+        }
+
+        <tr>
+            <th colspan="6">Total Number of @Html.DisplayFor(m => m.IN) Currency Notes.</th>
+        </tr>
+    </table>
+
+    <h1>@ViewBag.Message</h1>
+
+
+</div>
+
+<br />
+<br />
+<hr />
+<div>
+    @Html.ActionLink("Back First Page", "Index", "User")
+</div>
+
+
+
+
